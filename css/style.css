@@ -47,26 +47,77 @@ nav a:hover {
   border-bottom: 1px solid var(--color-blue-dark);
 }
 main section h2 {
-  border-bottom: 1px solid var(--color-grey-darker);
+  border-bottom: 1px solid var(--color-grey-base);
+  color: var(--color-grey-darkest);
   width: 100%;
   text-align: center;
   padding-bottom: 0.5rem;
 }
-
+/*
 aside blockquote {
   margin: 1rem;
   background-color: var(--color-grey-base);
   color: var(--color-grey-lighter);
   padding: 0.5rem;
+}*/
+blockquote {
+  background: var(--color-grey-lightest);
+  border-left: 10px solid var(--color-grey-light);
+  margin: 1.5rem 10px;
+  padding: 0.5rem 10px;
+  quotes: "'";
+  box-shadow: 1px 1px 2px 0px var(--color-grey-base);
 }
-aside cite:before {
+blockquote:before,
+blockquote p:after {
+  color: var(--color-grey-light);
+  content: '"';
+  font-style: italic;
+  font-size: 3rem;
+  line-height: 0.1rem;
+  margin-right: 0.25rem;
+  vertical-align: -0.8rem;
+}
+blockquote p:after {
+  vertical-align: -1.8rem;
+}
+blockquote p {
+  display: inline;
+}
+cite {
+  display: block;
+  color: var(--color-grey-base);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-serif);
+}
+cite:before {
   content: " - ";
 }
-article.course h3 {
-  font-family: var(--font-family--serif);
+.course {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.course .soldout {
+  display: none;
+}
+.course.soldout .soldout {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: var(--color-grey-lightest);
+  display: block;
+  background-color: var(--color-pink-light);
+  transform: rotate(-45deg);
+}
+.course h3 {
+  font-family: var(--font-family-serif);
 }
 .course header {
   position: relative;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
 }
@@ -79,7 +130,25 @@ article.course h3 {
   padding: 0.5rem 1rem;
   box-shadow: 1px 1px 1px 1px #000;
 }
-
+.course button {
+  display: block;
+  margin-top: auto;
+  border: none;
+  width: 100%;
+  padding: 1rem;
+  color: var(--color-grey-lightest);
+  font-size: var(--font-size-base);
+  background: var(--color-blue-base);
+  transition: all.4s;
+  box-shadow: 2px 2px 0px 0px transparent;
+}
+.course button:hover {
+  cursor: pointer;
+  color: var(--color-white);
+  font-size: var(--font-size-base);
+  background: var(--color-blue-light);
+  box-shadow: 2px 2px 0px 0px var(--color-blue-base);
+}
 @media all and (min-width: 600px) {
   main > section > h2 {
     grid-column: 1/-1;
@@ -108,14 +177,17 @@ article.course h3 {
   }
   nav {
     display: flex;
-    justify-content: space-around;
+
     background: var(--color-blue-light);
   }
   nav a {
     border-bottom-color: transparent;
+    flex-grow: 1;
+    text-align: center;
   }
   aside {
     order: 0;
+    border-right: 1px solid var(--color-grey-base);
   }
   footer {
     grid-column: 1/-1;
