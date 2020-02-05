@@ -14,9 +14,18 @@ body {
   font-size: 18px;
   line-height: 1.8rem;
 }
+h1 {
+  text-align: center;
+}
 img {
   max-width: 100%;
   height: auto;
+}
+a {
+  color: var(--color-blue-base);
+}
+a:hover {
+  color: var(--color-pink-base);
 }
 #wrapper {
   display: grid;
@@ -31,6 +40,25 @@ img {
 aside,
 footer {
   order: 1;
+}
+
+footer li {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+footer li:before {
+  content: "";
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  background-image: url(../gfx/geo.svg);
+}
+footer li > address {
+  display: inline-block;
+}
+footer li > a {
+  display: block;
+  margin-left: 1rem;
 }
 nav a {
   display: block;
@@ -98,6 +126,9 @@ cite:before {
   display: flex;
   flex-direction: column;
 }
+.course img {
+  box-shadow: 1px 1px 1px 1px var(--color-grey-dark);
+}
 .course .soldout {
   display: none;
 }
@@ -128,7 +159,20 @@ cite:before {
   background: var(--color-white);
   margin: 0;
   padding: 0.5rem 1rem;
-  box-shadow: 1px 1px 1px 1px #000;
+  box-shadow: 1px 1px 1px 1px var(--color-grey-dark);
+}
+.course .price-discount {
+  right: initial;
+  text-decoration: line-through;
+  left: -4px;
+}
+.course .price-discount + .price-full:before {
+  content: "only ";
+}
+.course .info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 .course button {
   display: block;
@@ -139,16 +183,21 @@ cite:before {
   color: var(--color-grey-lightest);
   font-size: var(--font-size-base);
   background: var(--color-blue-base);
-  transition: all.4s;
+  transition: all 0.4s;
   box-shadow: 2px 2px 0px 0px transparent;
 }
 .course button:hover {
   cursor: pointer;
   color: var(--color-white);
-  font-size: var(--font-size-base);
   background: var(--color-blue-light);
   box-shadow: 2px 2px 0px 0px var(--color-blue-base);
 }
+.course button:active {
+  background: var(--color-pink-light);
+  box-shadow: 2px 2px 0px 0px var(--color-pink-dark);
+  transition: all 0.1s;
+}
+
 @media all and (min-width: 600px) {
   main > section > h2 {
     grid-column: 1/-1;
@@ -168,16 +217,9 @@ cite:before {
     grid-column: 1/-1;
   }
 }
-@media screen and (min-width: 1200px) {
-  #wrapper {
-    grid-template-columns: 300px 1fr;
-  }
-  header {
-    grid-column: 1/-1;
-  }
+@media screen and (min-width: 800px) {
   nav {
     display: flex;
-
     background: var(--color-blue-light);
   }
   nav a {
@@ -185,13 +227,34 @@ cite:before {
     flex-grow: 1;
     text-align: center;
   }
+}
+@media screen and (min-width: 1000px) {
+  aside {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  aside h2 {
+    grid-column: 1/-1;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #wrapper {
+    grid-template-columns: 300px 1fr;
+  }
+  header {
+    grid-column: 1/-1;
+  }
+
   aside {
     order: 0;
+    display: initial;
     border-right: 1px solid var(--color-grey-base);
   }
   footer {
     grid-column: 1/-1;
     grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
   }
   footer > section:last-child {
     grid-column: auto;
