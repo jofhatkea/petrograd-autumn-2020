@@ -4,21 +4,15 @@ fetch("https://kea-alt-del.dk/t5/api/productlist")
   })
   .then(function (data) {
     showData(data)
-
   })
 
 function showData(jsonData) {
-  //console.log(jsonData)
-  //[].forEach
-  //{}.somethin
-  //1 make a template
-
-  //2 loop though jsonData
   jsonData.forEach(showSingleDish)
 }
 
 function showSingleDish(dish) {
-  console.log(dish)
+  //console.log(dish)
+
   //1 grab the template
   const template = document.querySelector("#dishTemplate").content;
 
@@ -27,6 +21,22 @@ function showSingleDish(dish) {
   // change some conetnt
   copy.querySelector("h3").textContent = dish.name;
   //append somewhere
+
+
+  if (dish.discount) { //on sale
+    copy.querySelector(".price-discount span").textContent = dish.price;
+    const newPrice = Math.round(dish.price - dish.price * dish.discount / 100);
+
+    copy.querySelector(".price-full span").textContent = newPrice;
+    //calculate new price
+    //49-49*10/100
+    //dish.price-dish.price*price.discount/100
+  } else { // not on discount
+    copy.querySelector(".price-discount").remove()
+    copy.querySelector(".price-full span").textContent = dish.price
+  }
+
+
 
   const whoIsYourDaddy = document.querySelector("#starters")
   whoIsYourDaddy.appendChild(copy)
