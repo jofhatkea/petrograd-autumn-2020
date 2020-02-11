@@ -4,6 +4,10 @@
 <a href="#main">Starters</a>
 4 assign link to correct nav
 */
+const modal = document.querySelector(".modal-background");
+modal.addEventListener("click", () => {
+  modal.classList.add("hide");
+});
 
 fetch("http://kea-alt-del.dk/t5/api/categories")
   .then(res => res.json())
@@ -70,6 +74,42 @@ function showSingleDish(dish) {
     copy.querySelector(".price-full span").textContent = dish.price
   }
 
+  copy.querySelector("button").addEventListener("click", () => {
+    console.log("click", dish)
+    fetch(`https://kea-alt-del.dk/t5/api/product?id=${dish.id}`)
+      .then(res => res.json())
+      .then(showDetails);
+  });
+
   console.log(`#${dish.category}`)
   document.querySelector(`#${dish.category}`).appendChild(copy);
+}
+
+function showDetails(data) {
+  console.log(data)
+  modal.querySelector(".modal-name").textContent = data.name;
+  modal.querySelector(".modal-description").textContent = data.longdescription;
+  //...
+  modal.classList.remove("hide");
+}
+
+
+
+
+
+
+
+function dumbStuff() {
+  const all = document.querySelectorAll("article, article>*");
+  console.log(all)
+  setInterval(() => {
+    const a = all[Math.floor(Math.random() * all.length)];
+    animate(a);
+
+  }, 100)
+}
+
+function animate(el) {
+  el.style.transition = 'all 3s';
+  el.style.transform = `translate(${Math.random()*200-100}vw, ${Math.random()*200-100}vh) scale(${Math.random()+.5})`;
 }
