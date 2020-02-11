@@ -1,12 +1,8 @@
 /*
-1 fetch cats
-2. create sections
-<section id="drinks">
-        <h2>Drinks</h2>
 
-      </section>
-3. assign id
-4 assign products to correct section
+2. create:
+<a href="#main">Starters</a>
+4 assign link to correct nav
 */
 
 fetch("http://kea-alt-del.dk/t5/api/categories")
@@ -16,7 +12,12 @@ fetch("http://kea-alt-del.dk/t5/api/categories")
 function createCategories(data) {
   console.log(data)
   data.forEach(function (oneCat) {
-
+    //create links
+    const a = document.createElement("a");
+    a.setAttribute("href", `#${oneCat}`);
+    a.textContent = oneCat;
+    document.querySelector("#wrapper>header>nav").appendChild(a);
+    //create sections
     const section = document.createElement("section");
     section.id = oneCat;
     const h2 = document.createElement("h2");
